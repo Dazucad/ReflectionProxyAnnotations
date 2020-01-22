@@ -13,7 +13,7 @@ public class Handler implements InvocationHandler {
 
     private final ProxyTestInterface original;
 
-    public Handler(ProxyTestInterface original) {
+    Handler(ProxyTestInterface original) {
         this.original = original;
     }
 

@@ -21,7 +21,8 @@ public class Main {
         myClass = testClass.getClass();
         Method[] methods = myClass.getDeclaredMethods();
         System.out.println("Геттеры класса TestClass");
-        for (Method method : methods) if (method.getName().contains("get")) System.out.println(method);
+        for (Method method : methods)
+            if (method.getName().contains("get")) System.out.println(method);
 
         System.out.println();
         Field[] fields = myClass.getDeclaredFields();

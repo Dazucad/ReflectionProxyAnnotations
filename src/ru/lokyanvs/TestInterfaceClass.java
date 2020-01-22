@@ -11,9 +11,9 @@ public class TestInterfaceClass implements ProxyTestInterface {
 
     private String textField;
     private int anInt;
-    public boolean aBoolean;
+    private boolean aBoolean;
 
-    public TestInterfaceClass(String textField, int anInt, boolean aBoolean) {
+    TestInterfaceClass(String textField, int anInt, boolean aBoolean) {
         this.textField = textField;
         this.anInt = anInt;
         this.aBoolean = aBoolean;
