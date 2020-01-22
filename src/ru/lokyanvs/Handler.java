@@ -19,14 +19,14 @@ public class Handler implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         Map<Integer, Integer> map = new HashMap<>();
-        map.put((Integer) args[0], (Integer) args[1]);
         if (method.getName().equals("sum")) {
+            map.put((Integer) args[0], (Integer) args[1]);
             if (method.isAnnotationPresent(Cache.class)) {
                 if (cacheSum.containsKey(map)) {
                     System.out.print("Значение метода sum для аргументов " + args[0] + " " + args[1] + " взято из кеша: ");
                     return cacheSum.get(map);
                 } else {
-                    System.out.print("Производится расчет метода sum для аргументов " + args[0] + " " + args[1] + ": ");
+                    System.out.print("Производится расчет стандартным методом sum для аргументов " + args[0] + " " + args[1] + ": ");
                     int i = (Integer) method.invoke(original, args);
                     cacheSum.put(map, i);
                     return i;
@@ -34,12 +34,13 @@ public class Handler implements InvocationHandler {
             }
         }
         if (method.getName().equals("pow")) {
+            map.put((Integer) args[0], (Integer) args[1]);
             if (method.isAnnotationPresent(Cache.class)) {
                 if (cachePow.containsKey(map)) {
                     System.out.print("Значение метода pow для аргументов " + args[0] + " " + args[1] + " взято из кеша: ");
                     return cachePow.get(map);
                 } else {
-                    System.out.print("Производится расчет метода pow для аргументов " + args[0] + " " + args[1] + ": ");
+                    System.out.print("Производится расчет стандартным методом pow для аргументов " + args[0] + " " + args[1] + ": ");
                     int i = (Integer) method.invoke(original, args);
                     cachePow.put(map, i);
                     return i;
@@ -47,7 +48,7 @@ public class Handler implements InvocationHandler {
             }
         }
 
-        System.out.print("Производится расчет метода " + method.getName() + " для аргументов " + args[0] + " " + args[1] + ": ");
+        System.out.print("Производится расчет методом " + method.getName() + ": ");
         return method.invoke(original, args);
     }
 }
