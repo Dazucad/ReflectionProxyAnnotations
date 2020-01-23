@@ -18,13 +18,10 @@ public class Handler implements InvocationHandler {
     }
 
     public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
-        System.out.println(original.getClass().getMethod(method.getName(),int.class,int.class).isAnnotationPresent(Cache.class));
-       // for (Method m:original.getClass().getDeclaredMethods()) System.out.println(m.getName()+" "+m.isAnnotationPresent(Cache.class));
-       // for (Class c:method.getParameterTypes()) System.out.println(c.getName());
         Map<Integer, Integer> map = new HashMap<>();
         if (method.getName().equals("sum")) {
             map.put((Integer) args[0], (Integer) args[1]);
-            if (method.isAnnotationPresent(Cache.class)) {
+            if (method.isAnnotationPresent(Cache.class) || original.getClass().getMethod(method.getName(), method.getParameterTypes()).isAnnotationPresent(Cache.class)) {
                 if (cacheSum.containsKey(map)) {
                     System.out.print("Значение метода sum для аргументов " + args[0] + " " + args[1] + " взято из кеша: ");
                     return cacheSum.get(map);
@@ -38,7 +35,7 @@ public class Handler implements InvocationHandler {
         }
         if (method.getName().equals("pow")) {
             map.put((Integer) args[0], (Integer) args[1]);
-            if (method.isAnnotationPresent(Cache.class)) {
+            if (method.isAnnotationPresent(Cache.class) || original.getClass().getMethod(method.getName(), method.getParameterTypes()).isAnnotationPresent(Cache.class)) {
                 if (cachePow.containsKey(map)) {
                     System.out.print("Значение метода pow для аргументов " + args[0] + " " + args[1] + " взято из кеша: ");
                     return cachePow.get(map);

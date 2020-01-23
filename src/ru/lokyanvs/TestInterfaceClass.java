@@ -32,7 +32,7 @@ public class TestInterfaceClass implements ProxyTestInterface {
     }
 
     @Override
-    //@Cache
+    @Cache
     public int sum(int a, int b) {
         return a + b;
     }

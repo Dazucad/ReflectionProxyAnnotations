@@ -42,6 +42,7 @@ public class Main {
         Handler handler = new Handler(testClass);
         ProxyTestInterface proxyTestInterface = (ProxyTestInterface) Proxy.newProxyInstance(ProxyTestInterface.class.getClassLoader(), new Class[]{ProxyTestInterface.class}, handler);
 
+        System.out.println();
         System.out.println(proxyTestInterface.sum(1, 2));
         System.out.println(proxyTestInterface.sum(1, 2));
         System.out.println(proxyTestInterface.sum(2, 1));
