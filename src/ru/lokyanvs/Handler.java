@@ -17,7 +17,10 @@ public class Handler implements InvocationHandler {
         this.original = original;
     }
 
-    public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+    public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
+        System.out.println(original.getClass().getMethod(method.getName(),int.class,int.class).isAnnotationPresent(Cache.class));
+       // for (Method m:original.getClass().getDeclaredMethods()) System.out.println(m.getName()+" "+m.isAnnotationPresent(Cache.class));
+       // for (Class c:method.getParameterTypes()) System.out.println(c.getName());
         Map<Integer, Integer> map = new HashMap<>();
         if (method.getName().equals("sum")) {
             map.put((Integer) args[0], (Integer) args[1]);
