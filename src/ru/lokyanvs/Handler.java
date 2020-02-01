@@ -17,6 +17,7 @@ public class Handler implements InvocationHandler {
         this.original = original;
     }
 
+    @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
         Map<Integer, Integer> map = new HashMap<>();
         if (method.getName().equals("sum")) {
